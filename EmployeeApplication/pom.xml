@@ -8,28 +8,18 @@
 		<version>2.7.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>FirstSpring</artifactId>
+	<groupId>com.employee</groupId>
+	<artifactId>EmployeeApplication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>FirstSpring</name>
-	<description>My first Spring Boot project</description>
+	<name>EmployeeApplication</name>
+	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<version>2.7.5</version>
 		</dependency>
 
 		<dependency>
