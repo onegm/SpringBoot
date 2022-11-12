@@ -1,6 +1,8 @@
 package com.employee.EmployeeApplication.service;
 
 import com.employee.EmployeeApplication.entity.Employee;
+import com.employee.EmployeeApplication.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,45 +11,36 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service // Tells Spring that this is a service.
+// Service class communicates with controller and data access layer
 public class EmployeeService {
-    // Dummy list for testing
-    List<Employee> employeeList = new ArrayList<>(Arrays.asList(
-            new Employee(1, "First", "Cairo"),
-            new Employee(2, "Second", "New York")
-    ));
+
+    @Autowired
+    EmployeeRepository employeeRepository; // Data access layer
 
     public List<Employee> getAllEmployees(){
-        return employeeList;
+        return employeeRepository.findAll();
     }
 
     public Employee getEmployee(int id){
-        return employeeList.stream().filter(e -> e.getId() == id).findFirst().get();
+//        try{
+//            return employeeRepository.findById(id).get();
+//        }
+//        catch(RuntimeException exc){
+//            throw new RuntimeException("Not found.");
+//        }
+//        One line version:
+        return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
     }
 
     public void createEmployee(Employee e){
-        employeeList.add(e);
+        employeeRepository.save(e);
     }
 
     public void updateEmployee(Employee e){
-        List<Employee> tempEmployeeList = new ArrayList<>();
-
-        for (Employee emp : employeeList) {
-            if(emp.getId() == e.getId()){
-                emp.setName(e.getName());
-                emp.setCity(e.getCity());
-            }
-            tempEmployeeList.add(emp);
-        }
-        this.employeeList = tempEmployeeList;
+        employeeRepository.save(e);
     }
 
     public void deleteEmployee(int id){
-        List<Employee> tempEmployeeList = new ArrayList<>();
-        for (Employee emp : employeeList) {
-            if(emp.getId() != id){
-                tempEmployeeList.add(emp);
-            }
-        }
-        this.employeeList = tempEmployeeList;
+        employeeRepository.deleteById(id);
     }
 }
