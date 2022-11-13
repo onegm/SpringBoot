@@ -1,5 +1,7 @@
 package com.employee.EmployeeApplication.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class Project {
     private String name;
     private String client;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "projects")
     private List<Employee> employees;
 

@@ -11,17 +11,17 @@ public class Employee {
     String name;
     String city;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL) // Cascade propogates all operations on one entity to all the other entities related to it
     private Spouse spouse;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Account") // Change column name from default: Salary_Account_ID
     private SalaryAccount salaryAccount;
 
-    @OneToMany // No new column created. New table mapping employee to addresses instead.
+    @OneToMany(cascade = CascadeType.ALL) // No new column created. New table mapping employee to addresses instead.
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "address_id"))
     private List<Address> addressList; // Multiple entries for same employee if more than one address.
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="employee_project", // Table name
             joinColumns = @JoinColumn(name="employee_id"), // column name of this entity
             inverseJoinColumns = @JoinColumn(name="project_id")) // name of other entity
