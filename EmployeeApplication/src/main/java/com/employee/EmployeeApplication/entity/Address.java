@@ -28,7 +28,14 @@ public class Address {
         this.zipcode = zipcode;
         this.city = city;
         this.country = country;
-        this.employee = employee;
+    }
+
+    public Address(String line1, String line2, String zipcode, String city, String country) {
+        this.line1 = line1;
+        this.line2 = line2;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.country = country;
     }
 
     public String getLine1() {

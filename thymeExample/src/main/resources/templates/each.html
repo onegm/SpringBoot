@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Iteration Demo</title>
+</head>
+<body>
+<!--Each tag iterates through all elements of 'list'-->
+<div th:each="names : ${list}">
+  <p th:text="${names}"></p>
+</div>
+
+<!--Status variable automatically generated with 'each' tag. Can tell the following:-->
+<!-- - index: starting from zero-->
+<!-- - count: how many elements have been iterated through so far-->
+<!-- - size: total number of elements in the list-->
+<!-- - even/odd: if current iteration count is even or odd (boolean)-->
+<!-- - first: if we are on first iteration (boolean)-->
+<!-- - last: if we are on last iteration (boolean)-->
+<h3>Status Variable Demo</h3>
+<div th:each="names, status : ${list}">
+    <p th:text="${status.index + 1} + ' ' + ${names}"></p>
+</div>
+
+<h3>Status Variable Demo w/ Conditionals</h3>
+<div th:each="names, status : ${list}">
+    <p th:style="${status.odd} ? 'color:red' : 'color:green'" th:text="${status.index + 1} + ' ' + ${names}"></p>
+</div>
+
+</body>
+</html>

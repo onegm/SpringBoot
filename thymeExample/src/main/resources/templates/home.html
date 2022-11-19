@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <script type="text/javascript" th:src="@{js/main.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{css/main.css}"></link>
+</head>
+<body>
+    <p>This is home</p>
+    <!-- th tag in span signals thymeleaf. Name variable defined in controller-->
+    <p>Welcome, <span th:text="${name}"></span> </p>
+    <!-- #strings. prefix used to call string methods-->
+    <span th:text="${#strings.toUpperCase(name)}"></span>
+    <!--Can create your own variables within the div tag but scope is limited to this tag-->
+    <div th:with="someVariable = ${someValue}, a=20, b=30">
+        <p th:text="'Value of a*b: ' + ${a}*${b}"></p>
+    </div>
+
+    <button id="click-button" onclick="main()">Click here</button>
+
+    <!-- Using the header_fragment with 'include' method.  Path to fragment is given along with fragment name 'header'-->
+    <footer id="parent-footer" th:include="fragments/header_fragment :: header">
+    <!--The body of the 'footer' tag is excluded and only "From Fragments" appears (as created in header_fragment).-->
+        <h1>From Home</h1>
+    <!-- 'Include' does not include the <nav> tags from fragment html-->
+    </footer>
+
+    <!--    Using the header_fragment with 'insert' method.-->
+    <footer id="parent-footer1" th:insert="fragments/header_fragment :: header">
+        <h1>From Home</h1>
+        <!--    'insert' includes the <nav> tags from the fragment html within the host tag 'footer' here-->
+    </footer>
+
+    <!--    Using the header_fragment with 'replace' method.-->
+    <footer id="parent-footer2" th:replace="fragments/header_fragment :: header">
+        <h1>From Home</h1>
+        <!--    'replace' replaces the host tag 'footer' with the <nav> tags from the fragment html-->
+    </footer>
+
+</body>
+</html>

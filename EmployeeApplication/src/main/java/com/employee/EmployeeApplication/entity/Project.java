@@ -3,7 +3,9 @@ package com.employee.EmployeeApplication.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Project {
@@ -15,14 +17,20 @@ public class Project {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "projects")
-    private List<Employee> employees;
+    private Set<Employee> employees = new HashSet<>();
 
     public Project() {
     }
 
-    public Project(String name, List<Employee> employees) {
+    public Project(String name, String client, Set<Employee> employees) {
         this.name = name;
+        this.client = client;
         this.employees = employees;
+    }
+
+    public Project(String name, String client) {
+        this.name = name;
+        this.client = client;
     }
 
     public String getName() {
@@ -33,11 +41,11 @@ public class Project {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
+    public Set<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Employee> employees) {
+    public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
 
