@@ -1,4 +1,4 @@
-package com.libraryApplication.library.entity;
+package com.application.courselibrary.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,26 +12,19 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "publishers")
 public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true, unique = true)
+    @Column(name = "name", length = 50, nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
-    private Set<Book> books = new HashSet<>();
+    @ManyToMany(mappedBy = "publishers", cascade = CascadeType.ALL)
+    private Set<Book> books = new HashSet<Book>();
 
     public Publisher(String name) {
         this.name = name;
-    }
-
-    public void addBook(Book book) {
-        this.books.add(book);
-    }
-
-    public void removeBook(Book book) {
-        this.books.remove(book);
     }
 }
