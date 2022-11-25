@@ -34,10 +34,12 @@ public class LibraryApplication {
 			Book book2 = new Book("222222", "Alchemist", "Book Description 2");
 			Author author2 = new Author("Coehlo", "Author description 2");
 			Category category2 = new Category("fiction");
+			Category category2b = new Category("spiritual");
 			Publisher publisher2 = new Publisher("Publisher 2");
 
 			book2.addAuthor(author2);
 			book2.addCategory(category2);
+			book2.addCategory(category2b);
 			book2.addPublisher(publisher2);
 
 			bookService.createBook(book2);
