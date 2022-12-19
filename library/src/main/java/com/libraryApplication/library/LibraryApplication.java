@@ -4,6 +4,7 @@ import com.libraryApplication.library.entity.Author;
 import com.libraryApplication.library.entity.Book;
 import com.libraryApplication.library.entity.Category;
 import com.libraryApplication.library.entity.Publisher;
+import com.libraryApplication.library.service.AuthorService;
 import com.libraryApplication.library.service.BookService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

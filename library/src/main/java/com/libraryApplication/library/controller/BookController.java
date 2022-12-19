@@ -49,12 +49,11 @@ public class BookController {
         return "book/new-book";
     }
     @PostMapping("/books/save-book")
-    public String saveBook(Book book, BindingResult result, Model model){
+    public String saveBook(Book book, BindingResult result){
         if(result.hasErrors()){
             return "book/new-book";
         }
         bookService.createBook(book);
-        model.addAttribute("books", bookService.getAllBooks());
         return "redirect:/books";
     }
 
@@ -65,24 +64,20 @@ public class BookController {
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("publishers", publisherService.getAllPublishers());
         model.addAttribute("authors", authorService.getAllAuthors());
-        bookService.updateBook(book);
         return "book/edit-book";
     }
     @PostMapping("/books/save-update/{id}")
-    public String updateBook(@PathVariable Long id, Book book, BindingResult result,Model model){
+    public String updateBook(@PathVariable Long id, Book book, BindingResult result){
         if(result.hasErrors()){
             return "book/edit-book";
         }
-        model.addAttribute("books", bookService.getAllBooks());
         bookService.updateBook(book);
         return "redirect:/books";
     }
 
     @GetMapping("/books/remove/{id}")
-    public String deleteBook(@PathVariable Long id, Model model){
-
+    public String deleteBook(@PathVariable Long id){
         bookService.removeBook(id);
-        model.addAttribute("books", bookService.getAllBooks());
         return "redirect:/books";
     }
 }
